@@ -18,4 +18,13 @@ app.use('/api/v1/bootcamps', bootcamps)
 
 
 // Start server
-app.listen(PORT, console.log(`Server running on port on ${PORT}`))
+const server = app.listen(PORT, console.log(`Server running on port on ${PORT}`))
+
+// Handle promise rejections
+
+process.on("unhandledRejection",(err, promise) => {
+    console.log(`Error - ${err.message}`)
+
+    // Close server with error message
+    server.close(()=> process.exit(1));
+})
