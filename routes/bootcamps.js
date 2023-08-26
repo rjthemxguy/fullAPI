@@ -6,6 +6,7 @@ const {getBootcamps,
       deleteBootcamps,
       getBootcamp} = require("../controlers/bootcamps")
 
+      // Routes
 router.route('/')
 .get(getBootcamps)
 .post(addBootcamps)

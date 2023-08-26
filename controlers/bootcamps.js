@@ -1,3 +1,6 @@
+
+// Controlers
+
 exports.getBootcamps = (req,res) => {
     res.send("All Bootcamps")
 }
