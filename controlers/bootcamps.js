@@ -1,3 +1,5 @@
+const Bootcamp = require("../models/Bootcamp");
+
 
 // Controlers
 
@@ -5,8 +7,22 @@ exports.getBootcamps = (req,res) => {
     res.send("All Bootcamps")
 }
 
-exports.addBootcamps = (req,res) => {
-    res.send("Add Bootcamp")
+exports.addBootcamps = async (req,res,next) => {
+   
+
+    try {
+        const bootcamp = await Bootcamp.create(req.body)
+
+        res.status(201).json({
+            success:true,
+            data:bootcamp
+        })
+        
+    } catch (error) {
+        res.status(400).json({success:false})
+    }
+
+    
 }
 
 exports.editBootcamps = (req,res) => {
