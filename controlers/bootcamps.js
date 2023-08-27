@@ -41,24 +41,55 @@ exports.addBootcamps = async (req,res,next) => {
 // @ Edit a Bootcamp
 //
 exports.editBootcamps = async (req,res,next) => {
-    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-        new:true,
-        runValidators:true
-   }) 
 
-    if(!bootcamp) {
-        return res.status(400).json({success:false})
+    
+
+    try {
+        const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+            new:true,
+            runValidators:true
+       }) 
+    
+       res.status(200).json({success:true, data:bootcamp})
+
+        if(!bootcamp) {
+            return res.status(400).json({success:false})
+       }
+
+
+        
+    } catch (error) {
+        res.status(400).json({success:false})
+    }
 
   
-   }
 
-   res.status(200).json({success:true, data:bootcamp})
+   
 }
+
+
+
+
 
 //@ Delete a bootcamp
 //
-exports.deleteBootcamps = (req,res) => {
-    res.send(`Bootcamp id to delete = ${req.params.id}`)
+exports.deleteBootcamps = async(req,res) => {
+
+    try {
+        const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id) 
+    
+       res.status(200).json({success:true, data:{}})
+
+        if(!bootcamp) {
+            return res.status(400).json({success:false})
+       }
+
+
+        
+    } catch (error) {
+        res.status(400).json({success:false})
+    }
+   
 }
 
 // @ Get a single Bootcamp by ID
