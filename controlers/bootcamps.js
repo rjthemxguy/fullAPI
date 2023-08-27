@@ -10,7 +10,7 @@ exports.getBootcamps = async (req,res) => {
     try {
         const bootcamp = await Bootcamp.find();
         
-        res.status(200).json({success:true, data:bootcamp})
+        res.status(200).json({success:true, count:bootcamp.length,data:bootcamp})
     } catch  {
 
         res.status(400).json({success:false})
@@ -66,10 +66,6 @@ exports.editBootcamps = async (req,res,next) => {
 
    
 }
-
-
-
-
 
 //@ Delete a bootcamp
 //
