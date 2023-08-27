@@ -40,8 +40,19 @@ exports.addBootcamps = async (req,res,next) => {
 
 // @ Edit a Bootcamp
 //
-exports.editBootcamps = (req,res) => {
-    res.send(`Bootcamp id = ${req.params.id}`)
+exports.editBootcamps = async (req,res,next) => {
+    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+        new:true,
+        runValidators:true
+   }) 
+
+    if(!bootcamp) {
+        return res.status(400).json({success:false})
+
+  
+   }
+
+   res.status(200).json({success:true, data:bootcamp})
 }
 
 //@ Delete a bootcamp
