@@ -6,15 +6,15 @@ const ErrorResponse = require("../utils/errorResponse")
 
 // @ Get all Bootcamps
 //
-exports.getBootcamps = async (req,res) => {
+exports.getBootcamps = async (req,res,next) => {
     
     try {
         const bootcamp = await Bootcamp.find();
         
         res.status(200).json({success:true, count:bootcamp.length,data:bootcamp})
-    } catch  {
+    } catch (err) {
 
-        res.status(400).json({success:false})
+       next(err)
         
     }
 }
@@ -33,8 +33,8 @@ exports.addBootcamps = async (req,res,next) => {
             data:bootcamp
         })
         
-    } catch (error) {
-        res.status(400).json({success:false})
+    } catch (err) {
+        next(err)
     }
 
 }
@@ -54,13 +54,13 @@ exports.editBootcamps = async (req,res,next) => {
        res.status(200).json({success:true, data:bootcamp})
 
         if(!bootcamp) {
-            return res.status(400).json({success:false})
+            return next(new ErrorResponse(`Bootcamp not found with ID of ${req.params.id}`,404))
        }
 
 
         
-    } catch (error) {
-        res.status(400).json({success:false})
+    } catch (err) {
+        next(err)
     }
 
   
@@ -70,7 +70,7 @@ exports.editBootcamps = async (req,res,next) => {
 
 //@ Delete a bootcamp
 //
-exports.deleteBootcamps = async(req,res) => {
+exports.deleteBootcamps = async(req,res,next) => {
 
     try {
         const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id) 
@@ -83,8 +83,9 @@ exports.deleteBootcamps = async(req,res) => {
 
 
         
-    } catch (error) {
-        res.status(400).json({success:false})
+    } catch (err) {
+
+        next(err)
     }
    
 }
