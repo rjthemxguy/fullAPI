@@ -14,6 +14,6 @@ router.route('/')
 router.route('/:id')
 
 .delete(deleteBootcamps)
-.put(getBootcamp)
+.get(getBootcamp)
 
 module.exports = router;

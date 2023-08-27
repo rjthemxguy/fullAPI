@@ -50,15 +50,18 @@ exports.deleteBootcamps = (req,res) => {
     res.send(`Bootcamp id to delete = ${req.params.id}`)
 }
 
-// @ Get a Bootcamp by ID
+// @ Get a single Bootcamp by ID
 //
 exports.getBootcamp = async (req,res,next) => {
 
-    
-   
+      
     try {
         const bootcamp = await Bootcamp.findById(req.params.id)
         res.status(200).json({success:true, data:bootcamp})
+
+        if(!bootcamp) {
+           return res.status(400).json({Success:false})
+        }
 
     } catch (error) {
         res.status(400).json({success:false})
