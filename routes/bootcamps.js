@@ -12,8 +12,8 @@ router.route('/')
 .post(addBootcamps)
 
 router.route('/:id')
-.put(editBootcamps)
+
 .delete(deleteBootcamps)
-.get(getBootcamp)
+.put(getBootcamp)
 
 module.exports = router;
