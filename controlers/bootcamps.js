@@ -104,7 +104,7 @@ exports.getBootcamp = async (req,res,next) => {
 
     } catch (err) {
      
-       next(new ErrorResponse(`Bootcamp not found with ID of ${req.params.id}`,404))
+       next(err)
     }
 
    
