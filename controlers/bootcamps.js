@@ -9,8 +9,18 @@ const geocoder = require('../utils/geocoder');
 //
 exports.getBootcamps = asyncHandler(async (req,res,next) => {
       
-        const bootcamp = await Bootcamp.find();
+        let query;
+
+        let queryStr = JSON.stringify(req.query);
+
+
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`)
+
+        query = Bootcamp.find(JSON.parse(queryStr))
+
+        const bootcamp = await query;
         
+        console.log(queryStr)
         res.status(200).json({success:true, count:bootcamp.length,data:bootcamp})
           
 });
