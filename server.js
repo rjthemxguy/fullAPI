@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const bootcamps = require("./routes/bootcamps")
+const courses = require("./routes/courses")
 const connectDB = require("./config/db")
 const errorHandle = require("./middleware/error");
 const errorHandler = require("./middleware/error");
@@ -19,6 +20,8 @@ connectDB();
 
 // Bootcamps routes
 app.use('/api/v1/bootcamps', bootcamps)
+app.use('/api/v1/courses', courses)
+
 app.use(errorHandler)
 
 // Start server
