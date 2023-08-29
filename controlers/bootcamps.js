@@ -11,7 +11,12 @@ exports.getBootcamps = asyncHandler(async (req,res,next) => {
       
         let query;
 
-        let queryStr = JSON.stringify(req.query);
+        reqQuery = {...req.query};
+
+        // Fields to exclude from result
+        const removeFields = ["select"]
+
+        let queryStr = JSON.stringify(reqQuery);
 
 
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`)
