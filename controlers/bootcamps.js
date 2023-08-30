@@ -130,7 +130,7 @@ exports.editBootcamps = asyncHandler(async (req,res,next) => {
 exports.deleteBootcamps = asyncHandler(async(req,res,next) => {
 
     
-        const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id) 
+        const bootcamp = await Bootcamp.findById(req.params.id) 
     
        res.status(200).json({success:true, data:{}})
 
@@ -139,7 +139,7 @@ exports.deleteBootcamps = asyncHandler(async(req,res,next) => {
        }
 
 
-        
+bootcamp.deleteOne() 
    
 });
 
