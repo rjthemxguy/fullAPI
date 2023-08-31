@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const bootcamps = require("./routes/bootcamps")
 const courses = require("./routes/courses")
 const connectDB = require("./config/db")
+const fileUpload = require("express-fileupload")
 const errorHandle = require("./middleware/error");
 const errorHandler = require("./middleware/error");
 
@@ -22,6 +23,7 @@ connectDB();
 app.use('/api/v1/bootcamps', bootcamps)
 app.use('/api/v1/courses', courses)
 
+app.use(fileUpload)
 app.use(errorHandler)
 
 // Start server
